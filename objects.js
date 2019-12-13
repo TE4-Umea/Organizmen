@@ -36,7 +36,7 @@ class Player extends WorldObject  {
     move() {
         var x = this.position.getX();
         var y = this.position.getY();
-        console.log("MOVE: x is: " + x + " y is: " + y + " " +  (Math.floor(Math.random() * 9)));
+        // console.log("MOVE: x is: " + x + " y is: " + y + " " +  (Math.floor(Math.random() * 9)));
         
         switch (Math.floor(Math.random() * 9)) {
             case 0: 

@@ -1,14 +1,9 @@
 canvas.setAttribute("id", "canvas");
 
 
-
-
 var p;
 var ctx;
 var tileSize;
-// let rocks = [];
-
-
 
 
 function main() {
@@ -16,24 +11,27 @@ function main() {
     ctx = canvas.getContext('2d');
     
     console.log(window.innerHeight + ":h w: " + window.innerWidth);
+    
+    canvas.width  = map[0].length*48;
+    canvas.height = map.length*48;
+    
+    console.log(map);
+    
+    
 
-    canvas.width  = window.innerWidth - 16;
-    canvas.height = window.innerHeight - 16;
+    console.log(canvas.width);
+    console.log(canvas.height);
+    
 
     //Creates the player
     tileSize = canvas.height / 16;
 
     p = new Player(8*tileSize, 8*tileSize, tileSize);
-    r = new Rock(8*tileSize, 8*tileSize, tileSize);
 
     resetBoard();
 
 
     p.drawPlayer(ctx);
-
-    /* rocks.push(new Rock(10*tileSize, 15*tileSize));
-    rocks.push(new Rock(4 * tileSize, 8 * tileSize));
-    rocks.push(new Rock(12 * tileSize, 12 * tileSize)); */
     step();
 }
 
@@ -56,6 +54,8 @@ function step() {
 function resetBoard(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+
+    //Ritar ut ett rutnät
     ctx.beginPath();
     ctx.lineWidth = 2;
     for(let i = 0; i < tileSize; i++) {

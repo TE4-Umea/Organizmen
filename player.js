@@ -2,10 +2,12 @@ class Player {
     constructor(posX, posY, tileSize) {
         this.position = new Cord(posX, posY);
         this.tileSize = tileSize;
+        this.cord = [];
     }
 
     getPosition() {
         return this.position;
+
     }
 
     setPosition(newPosX, newPosY) {
@@ -26,6 +28,9 @@ class Player {
         var y = this.position.getY();
         console.log("MOVE: x is: " + x + " y is: " + y + " " +  (Math.floor(Math.random() * 9)));
         
+        //this.cord.push(this.position)
+        //console.log(this.cord)
+
         switch (Math.floor(Math.random() * 9)) {
             case 0: 
                 break;
@@ -83,15 +88,6 @@ class Player {
         if (posY < 0 || posY >= document.getElementById('canvas').height) {
             return true;
         }
-
-        /* rocks.forEach(element => {
-            if (posX == element.x) {
-                return true;
-            }
-            if (posX == element.y) {
-                return true;
-            }
-        }); */
 
         return false;
     }

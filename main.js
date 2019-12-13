@@ -3,9 +3,10 @@ canvas.setAttribute("id", "canvas");
 
 
 
-var p;
+var p, r;
 var ctx;
 var tileSize;
+var worldObjects = [];
 // let rocks = [];
 
 
@@ -23,17 +24,16 @@ function main() {
     //Creates the player
     tileSize = canvas.height / 16;
 
-    p = new Player(8*tileSize, 8*tileSize, tileSize);
-    r = new Rock(8*tileSize, 8*tileSize, tileSize);
-
+    p = new Player(8*tileSize, 8*tileSize, tileSize, "#FF0000");
+    worldObjects.push(...[
+        new StaticObject(7*tileSize, 9*tileSize, tileSize, "#0000FF", "food"),
+        new StaticObject(12*tileSize, 12*tileSize, tileSize, "#808000", "food")
+    ])
     resetBoard();
-
-
-    p.drawPlayer(ctx);
-
-    /* rocks.push(new Rock(10*tileSize, 15*tileSize));
-    rocks.push(new Rock(4 * tileSize, 8 * tileSize));
-    rocks.push(new Rock(12 * tileSize, 12 * tileSize)); */
+    p.draw(ctx);
+    worldObjects.forEach(element => {
+        element.draw(ctx);   
+    });
     step();
 }
 
@@ -46,9 +46,10 @@ function step() {
         p.move();
         start = Date.now();
         resetBoard();
-        p.drawPlayer(ctx);
-        //r.draw();
-        
+        p.draw(ctx);
+        worldObjects.forEach(element => {
+            element.draw(ctx);
+        });
     }
     window.requestAnimationFrame(step);
 }

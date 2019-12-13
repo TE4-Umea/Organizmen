@@ -1,7 +1,8 @@
-class Player {
-    constructor(posX, posY, tileSize) {
-        this.position = new Cord(posX, posY);
+class WorldObject {
+    constructor(posX, posY, tileSize, color = "#0000FF") {
         this.tileSize = tileSize;
+        this.position = new Cord(posX, posY);
+        this.color = color;
     }
 
     getPosition() {
@@ -12,15 +13,20 @@ class Player {
         this.position.setCord(newPosX, newPosY);
     }
 
-    drawPlayer(ctx) {
-        ctx.fillStyle = "#FF0000";
-        var x = this.position.getX();
-        var y = this.position.getY();
-        console.log("x is: " + x + " y is: " + y);
-        ctx.fillRect(x, y, this.tileSize, this.tileSize);
-    
+    draw(ctx){
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.position.getX(), this.position.getY(), this.tileSize, this.tileSize);
     }
+}
+class StaticObject extends WorldObject {
+    constructor(x, y, tileSize, color, type) {
+        super(x, y, tileSize, color);
+        this.type = type;
 
+    }
+}
+class Player extends WorldObject  {
+    
     move() {
         var x = this.position.getX();
         var y = this.position.getY();
@@ -94,5 +100,30 @@ class Player {
         }); */
 
         return false;
+    }
+}
+
+class Cord {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    getCord() {
+        return [this.x, this.y];
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
+
+    }
+
+    setCord(x, y) {
+        this.x = x;
+        this.y = y;
     }
 }

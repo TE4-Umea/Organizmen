@@ -26,6 +26,12 @@ class StaticObject extends WorldObject {
     }
 }
 class Player extends WorldObject  {
+    constructor (x, y, tileSize, color) {
+        super(x, y, tileSize, color);
+        this.hungerCounter = 0;
+        this.thirstCounter = 0;
+
+    }
     
     move() {
         var x = this.position.getX();
@@ -36,41 +42,41 @@ class Player extends WorldObject  {
             case 0: 
                 break;
             case 1: 
-                if (!this.collide(x - this.tileSize, y))
+                if (!this.checkBorders(x - this.tileSize, y))
                     this.setPosition(x - this.tileSize, y);
                 break;
             case 2: 
-                if (!this.collide(x - this.tileSize, y + this.tileSize)) {
+                if (!this.checkBorders(x - this.tileSize, y + this.tileSize)) {
                     this.setPosition(x - this.tileSize, y + this.tileSize);
                 }
                 break;
             case 3:
-                if (!this.collide(x, y + this.tileSize)) {
+                if (!this.checkBorders(x, y + this.tileSize)) {
                     this.setPosition(x, y + this.tileSize);
                 }
                 break;
             case 4:
-                if (!this.collide(x + this.tileSize, y + this.tileSize)) {
+                if (!this.checkBorders(x + this.tileSize, y + this.tileSize)) {
                     this.setPosition(x + this.tileSize, y + this.tileSize);
                 }
                 break;
             case 5:
-                if (!this.collide(x + this.tileSize, y)) {
+                if (!this.checkBorders(x + this.tileSize, y)) {
                     this.setPosition(x + this.tileSize, y);
                 }
                 break;
             case 6:
-                if (!this.collide(x + this.tileSize, y - this.tileSize)) {
+                if (!this.checkBorders(x + this.tileSize, y - this.tileSize)) {
                     this.setPosition(x + this.tileSize, y - this.tileSize);
                 }
                 break;
             case 7:
-                if (!this.collide(x, y - this.tileSize)) {
+                if (!this.checkBorders(x, y - this.tileSize)) {
                     this.setPosition(x, y - this.tileSize);
                 }
                 break;
             case 8:
-                if (!this.collide(x - this.tileSize, y - this.tileSize)) {
+                if (!this.checkBorders(x - this.tileSize, y - this.tileSize)) {
                     this.setPosition(x - this.tileSize, y - this.tileSize);
                 }
                 break;
@@ -81,7 +87,7 @@ class Player extends WorldObject  {
     }
 
 
-    collide(posX, posY){
+    checkBorders(posX, posY){
         if (posX < 0 || posX >= document.getElementById('canvas').width) {
             return true;
         }
@@ -89,16 +95,6 @@ class Player extends WorldObject  {
         if (posY < 0 || posY >= document.getElementById('canvas').height) {
             return true;
         }
-
-        /* rocks.forEach(element => {
-            if (posX == element.x) {
-                return true;
-            }
-            if (posX == element.y) {
-                return true;
-            }
-        }); */
-
         return false;
     }
 }

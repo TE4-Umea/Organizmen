@@ -26,7 +26,7 @@ function main() {
 
     p = new Player(8*tileSize, 8*tileSize, tileSize, "#FF0000");
     worldObjects.push(...[
-        new StaticObject(7*tileSize, 9*tileSize, tileSize, "#0000FF", "food"),
+        new StaticObject(8*tileSize, 9*tileSize, tileSize, "#0000FF", "water"),
         new StaticObject(12*tileSize, 12*tileSize, tileSize, "#808000", "food")
     ])
     resetBoard();
@@ -42,7 +42,7 @@ let start = null;
 function step() {
     if (!start) start = Date.now();
     var progress = Date.now() - start;
-    if (progress > 500) { // Denna körs varje sekund
+    if (progress > 500) {
         p.move();
         start = Date.now();
         resetBoard();
@@ -50,8 +50,38 @@ function step() {
         worldObjects.forEach(element => {
             element.draw(ctx);
         });
+        checkColision();
     }
     window.requestAnimationFrame(step);
+}
+
+function checkColision() {
+    let playerPos = p.getPosition();
+    for(let staticObject of worldObjects) {
+        let objectPos = staticObject.getPosition();
+        if (playerPos.getX() == objectPos.getX() &&
+            playerPos.getY() == objectPos.getY()) {
+            console.log("owox");
+            if(staticObject.type == "water") {
+                p.thirstCounter++;
+                console.log(p.thirstCounter, p.hungerCounter);
+
+
+            } else {
+                p.hungerCounter++;
+                console.log(p.thirstCounter, p.hungerCounter);
+            }
+            return true;
+        }
+    }
+     /* rocks.forEach(element => {
+            if (posX == element.x) {
+                return true;
+            }
+            if (posX == element.y) {
+                return true;
+            }
+        }); */
 }
 
 function resetBoard(){

@@ -2,7 +2,6 @@ class Player {
     constructor(posX, posY, tileSize) {
         this.position = new Cord(posX, posY);
         this.tileSize = tileSize;
-        this.cord = [];
     }
 
     getPosition() {
@@ -27,9 +26,7 @@ class Player {
         var x = this.position.getX();
         var y = this.position.getY();
         console.log("MOVE: x is: " + x + " y is: " + y + " " +  (Math.floor(Math.random() * 9)));
-        
-        //this.cord.push(this.position)
-        //console.log(this.cord)
+    
 
         switch (Math.floor(Math.random() * 9)) {
             case 0: 

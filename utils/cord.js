@@ -22,5 +22,3 @@ class Cord {
         this.y = y;
     }
 }
-
-//cord = new Cord(this.x, this.y)
